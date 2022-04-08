@@ -30,33 +30,35 @@ func main() {
 		var ticketsBooked = userTickets
 
 		//stop from proceeding to next step if ticket number is invalid
-		if userTickets > Remainingtickets {
+		if userTickets <= Remainingtickets {
+			Remainingtickets = Remainingtickets - uint(ticketsBooked)
+			fmt.Println("Remaining tickets:", Remainingtickets)
+
+			firstnames := []string{}
+			//for loop iteration
+			//two values for each iteration which is the _ and the element
+			//_ is blank identifier
+			//element is booking; bookings is the one being iterated; range is the one that allows us to iterate over elements for different data structures
+			//range for arrays and slices it gives back the index and value for each element
+
+			bookings = append(bookings, username+" "+lastname) //add element to the next index
+
+			for _, booking := range bookings {
+				//The Fields() function takes the string as a parameter, which we need to splits.
+				var names = strings.Fields(booking)
+				firstnames = append(firstnames, names[0])
+			}
+			fmt.Printf("users first name%v \n", firstnames)
+
+			if Remainingtickets == 0 {
+				fmt.Println("Tickets are sold out")
+				break
+			}
+		} else {
+
 			fmt.Printf("we only have %v tickets left you can't book %v tickets exceeding %v tickets", Remainingtickets, userTickets, Remainingtickets)
 			// causes the loop to skip remainder of its body and repeating the 1st step
 			continue
-		}
-		Remainingtickets = Remainingtickets - uint(ticketsBooked)
-		fmt.Println("Remaining tickets:", Remainingtickets)
-
-		firstnames := []string{}
-		//for loop iteration
-		//two values for each iteration which is the _ and the element
-		//_ is blank identifier
-		//element is booking; bookings is the one being iterated; range is the one that allows us to iterate over elements for different data structures
-		//range for arrays and slices it gives back the index and value for each element
-
-		bookings = append(bookings, username+" "+lastname) //add element to the next index
-
-		for _, booking := range bookings {
-			//The Fields() function takes the string as a parameter, which we need to splits.
-			var names = strings.Fields(booking)
-			firstnames = append(firstnames, names[0])
-		}
-		fmt.Printf("users first name%v \n", firstnames)
-
-		if Remainingtickets == 0 {
-			fmt.Println("Tickets are sold out")
-			break
 		}
 	}
 	//bookings = append(bookings, "tite")
